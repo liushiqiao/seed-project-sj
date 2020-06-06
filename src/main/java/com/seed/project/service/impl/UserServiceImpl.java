@@ -150,6 +150,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public PageVO<SysUser> pageInfoByDeptId(UserPageReqVO vo) {
+
+        String deptId = vo.getDeptId();
+        List<String> childrenIds = sysDeptMapper.selectChildIdsByPid(deptId);
+        if (childrenIds==null||childrenIds.isEmpty()){
+            childrenIds=Arrays.asList(deptId);
+        }else {
+            childrenIds.add(deptId);
+        }
+        PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
+        List<SysUser> list=sysUserMapper.selectUserInfoByDeptIds(childrenIds);
+        for (SysUser sysUser:list){
+            SysDept sysDept = sysDeptMapper.selectByPrimaryKey(sysUser.getDeptId());
+            if(sysDept!=null){
+                sysUser.setDeptName(sysDept.getName());
+            }
+        }
+        return PageUtil.getPageVO(list);
+    }
+
+    @Override
     public void addUser(UserAddReqVO vo) {
         SysUser sysUser=new SysUser();
         BeanUtils.copyProperties(vo,sysUser);

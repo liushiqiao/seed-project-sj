@@ -22,6 +22,9 @@ public class UserPageReqVO {
     @ApiModelProperty(value = "用户id")
     private String userId;
 
+    @ApiModelProperty(value = "部门id")
+    private String deptId;
+
     @ApiModelProperty(value = "账号")
     private String username;
 

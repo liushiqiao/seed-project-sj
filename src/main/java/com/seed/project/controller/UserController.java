@@ -54,6 +54,17 @@ public class UserController {
 
 
 
+    @PostMapping("/getUsersByDeptId")
+    @ApiOperation(value = "分页查询用户接口根据部门id")
+    @RequiresPermissions("sys:user:list")
+    @LogAnnotation(title = "组织管理-用户管理",action = "分页查询用户接口根据部门id")
+    public DataResult<PageVO<SysUser>> pageInfoByDeptId(@RequestBody UserPageReqVO vo){
+        DataResult result=DataResult.success();
+        result.setData(userService.pageInfoByDeptId(vo));
+        return result;
+    }
+
+
     @PostMapping("/users")
     @ApiOperation(value = "分页查询用户接口")
     @RequiresPermissions("sys:user:list")

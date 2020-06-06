@@ -29,6 +29,8 @@ public interface UserService {
 
     PageVO<SysUser> pageInfo(UserPageReqVO vo);
 
+    PageVO<SysUser> pageInfoByDeptId(UserPageReqVO vo);
+
     void addUser(UserAddReqVO vo);
 
     UserOwnRoleRespVO getUserOwnRole(String userId);
@@ -51,4 +53,5 @@ public interface UserService {
     void userUpdatePwd(UserUpdatePwdReqVO vo, String accessToken, String refreshToken);
 
     void logout(String accessToken,String refreshToken);
+
 }

@@ -128,7 +128,6 @@
         },"GET",false);
 
         $(document).on('click','.menuNvaBar',function () {
-            debugger;
             var dataid = $(this);
             if ($(".layui-tab-title li[lay-id]").length <= 0) {
                 active.tabAdd(dataid.attr("data-url"), dataid.attr("data-id"), dataid.attr("data-title"));

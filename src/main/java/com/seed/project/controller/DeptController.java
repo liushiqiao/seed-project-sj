@@ -41,6 +41,16 @@ public class DeptController {
         return result;
     }
 
+    @GetMapping("/depts/allDeptTree")
+    @ApiOperation(value = "查询所有部门树形结构数据接口")
+    @LogAnnotation(title = "组织管理-部门管理",action = "查询所有部门树形结构数据接口")
+    // @RequiresPermissions("sys:dept:list")
+    public DataResult<List<SysDept>> getAllDeptTree(){
+        DataResult result =DataResult.success();
+        result.setData(deptService.getAllDeptTreeList());
+        return result;
+    }
+
     @GetMapping("/dept/tree")
     @ApiOperation(value = "部门树形结构列表接口")
     @LogAnnotation(title = "组织管理-部门管理",action = "部门树形结构列表接口")

@@ -21,9 +21,12 @@ public class DeptRespNodeVO {
     @ApiModelProperty(value = "部门名称")
     private String title;
 
-    @ApiModelProperty("是否展开 默认true")
-    private boolean spread=true;
+    @ApiModelProperty("是否展开 默认false")
+    private boolean spread=false;
 
     @ApiModelProperty(value = "子集叶子节点")
     private List<?> children;
+
+    @ApiModelProperty("父节点")
+    private String pid;
 }

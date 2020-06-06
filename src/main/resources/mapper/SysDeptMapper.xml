@@ -196,6 +196,12 @@
     where relation_code LIKE CONCAT(#{relationCode},'%') and deleted=1
   </select>
 
+  <select id="selectChildIdsByPid" resultType="java.lang.String">
+    select id
+    from sys_dept
+    where pid =#{pid} and deleted=1
+  </select>
+
   <!-- @Description:     更新删除部门数据-->
   <!-- @Author:          小霍-->
   <update id="deletedDepts">

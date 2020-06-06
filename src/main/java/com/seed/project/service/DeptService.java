@@ -26,4 +26,6 @@ public interface DeptService {
 
     void deletedDept(String id);
 
+    List<DeptRespNodeVO> getAllDeptTreeList();
+
 }
