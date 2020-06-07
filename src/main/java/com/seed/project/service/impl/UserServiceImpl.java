@@ -61,10 +61,16 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRoleService userRoleService;
+
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private DeptService deptService;
+
     @Autowired
     private TokenSettings tokenSettings;
+
     @Autowired
     private PermissionService permissionService;
 
@@ -153,14 +159,11 @@ public class UserServiceImpl implements UserService {
     public PageVO<SysUser> pageInfoByDeptId(UserPageReqVO vo) {
 
         String deptId = vo.getDeptId();
-        List<String> childrenIds = sysDeptMapper.selectChildIdsByPid(deptId);
-        if (childrenIds==null||childrenIds.isEmpty()){
-            childrenIds=Arrays.asList(deptId);
-        }else {
-            childrenIds.add(deptId);
-        }
+        List<String> subDeptIdByPid = deptService.getSubDeptIdByPid(deptId);
+
         PageHelper.startPage(vo.getPageNum(),vo.getPageSize());
-        List<SysUser> list=sysUserMapper.selectUserInfoByDeptIds(childrenIds);
+
+        List<SysUser> list=sysUserMapper.selectUserInfoByDeptIds(subDeptIdByPid);
         for (SysUser sysUser:list){
             SysDept sysDept = sysDeptMapper.selectByPrimaryKey(sysUser.getDeptId());
             if(sysDept!=null){

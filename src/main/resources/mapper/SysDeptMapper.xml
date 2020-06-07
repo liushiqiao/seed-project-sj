@@ -201,6 +201,11 @@
     from sys_dept
     where pid =#{pid} and deleted=1
   </select>
+  <select id="selectAllIds" resultType="com.seed.project.entity.SysDept">
+    select id,pid
+    from sys_dept
+    where deleted=1
+  </select>
 
   <!-- @Description:     更新删除部门数据-->
   <!-- @Author:          小霍-->

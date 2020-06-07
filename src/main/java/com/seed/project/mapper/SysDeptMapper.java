@@ -29,4 +29,6 @@ public interface SysDeptMapper {
     int deletedDepts(@Param("updateTime") Date updateTime, @Param("list") List<String> list);
 
     List<String> selectChildIdsByPid(@Param("pid") String pid);
+
+    List<SysDept> selectAllIds();
 }

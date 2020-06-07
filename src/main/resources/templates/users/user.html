@@ -10,7 +10,7 @@
 <!--<div class="layui-header header"></div>-->
 <div class="layui-layout layui-layout-admin">
     <div class="layui-side" style="top: 0px;padding-top: 30px;width:20%;background: #f2f2f2">
-        <div class="layui-side-scroll">
+        <div class="layui-side-scroll" style="width: 100%">
             <div id="allDeptTree"></div>
         </div>
     </div>
@@ -18,17 +18,10 @@
     <div class="layui-body" style="top: 0px;width: 87%;padding-left: 160px">
         <div class="panel panel-default operation_user" hidden>
             <div class="panel-heading title"></div>
-            <!--    &lt;!&ndash; 左侧菜单&ndash;&gt;-->
-            <!--    <div id="mainmenu" class="layui-side layui-bg-black" >-->
-            <!--        <div class="layui-side-scroll">-->
-            <!--            <div class="navBar layui-side-scroll" id="navBarId"></div>-->
-            <!--        </div>-->
-            <!--    </div>-->
             <div class="layui-card-body">
                 <form class="layui-form " action="" lay-filter="deptInfo" style="width: 700px;margin-top: 10px">
                     <input name="id" hidden/>
                     <input name="deptId" hidden/>
-
                     <div class="layui-form-item">
                         <label class="layui-form-label">账号</label>
                         <div class="layui-input-block">
@@ -36,17 +29,58 @@
                                    class="layui-input">
                         </div>
                     </div>
-                    <div class="layui-form-item">
+                    <div class="layui-form-item password">
                         <div class="layui-form-label ">密码</div>
                         <div class="layui-input-block">
                             <input type="password" name="password" placeholder="请输入密码" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
+                    <div class="layui-form-item repass">
+                        <div class="layui-form-label ">确认密码</div>
+                        <div class="layui-input-block">
+                            <input type="password" name="repass" placeholder="请确认密码" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">用户名</div>
+                        <div class="layui-input-block">
+                            <input type="realName" name="realName" placeholder="请输入用户名" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">用户类型</div>
+                        <div class="layui-input-inline">
+                            <select name="userType" lay-filter="userType">
+                                <option value="0"></option>
+                                <option value="1">普通用户</option>
+                                <option value="2">审批用户</option>
+                                <option value="3">窗口用户</option>
+                                <option value="4">其它用户</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="layui-form-item">
                         <div class="layui-form-label ">手机号</div>
                         <div class="layui-input-block">
                             <input type="phone" name="phone" placeholder="请输入手机号" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">联系电话</div>
+                        <div class="layui-input-block">
+                            <input type="contactNumber" name="contactNumber" placeholder="请输入联系电话" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">窗口号</div>
+                        <div class="layui-input-inline">
+                            <input type="windowNum" name="windowNum" placeholder="请输入窗口号" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
@@ -202,33 +236,49 @@
                 , cols: [
                     [
                         {type: 'checkbox', fixed: 'left'},
-                        {field: 'id', title: 'ID', width: 300, sort: true},
-                        {field: 'username', title: '账号', width: 130},
-                        {field: 'phone', title: '手机号', width: 130},
-                        {field: 'deptName', title: '所属公司', width: 120},
-                        {field: 'realName', title: '真实名称', width: 120},
-                        {field: 'nickName', title: '昵称', width: 130},
-                        {field: 'email', title: '邮箱', width: 150},
-                        {
-                            field: 'sex', title: '性别', width: 100, templet: function (item) {
-                                if (item.sex === 1) {
-                                    return "男";
-                                }
-                                if (item.sex === 2) {
-                                    return "女";
+                        // {field: 'id', title: 'ID', width: 300, sort: true},
+                        {field: 'username', title: '账号', width: 100},
+                        {field: 'phone', title: '手机号', width: 120},
+                        {field: 'deptName', title: '所属公司', width: 150},
+                        {field: 'realName', title: '真实名称', width: 100},
+                        {field: 'userType', title: '用户类型', width: 100 , templet: function (item) {
+                                if (item.userType === 1) {
+                                    return '普通用户';
+                                }else if (item.userType === 2){
+                                    return '审批用户';
+                                }else if (item.userType === 3){
+                                    return '窗口用户';
+                                }else if(item.userType === 4) {
+                                    return '其它用户';
+                                }else {
+                                    return '';
                                 }
                             }
                         },
+                        {field: 'contactNumber', title: '联系电话', width: 100},
+                        {field: 'windowNum', title: '窗口号', width: 80,style:'text-align:center'},
+                        // {field: 'nickName', title: '昵称', width: 130},
+                        // {field: 'email', title: '邮箱', width: 150},
+                        // {
+                        //     field: 'sex', title: '性别', width: 100, templet: function (item) {
+                        //         if (item.sex === 1) {
+                        //             return "男";
+                        //         }
+                        //         if (item.sex === 2) {
+                        //             return "女";
+                        //         }
+                        //     }
+                        // },
                         {
-                            field: 'createTime', title: '创建时间', minWidth: 120, templet: function (item) {
+                            field: 'createTime', title: '创建时间', minWidth: 170, sort: true,templet: function (item) {
                                 return CoreUtil.formattime(item.createTime);
                             }
                         },
-                        {
-                            field: 'updateTime', title: '更新时间', minWidth: 120, templet: function (item) {
-                                return CoreUtil.formattime(item.updateTime);
-                            }
-                        },
+                        // {
+                        //     field: 'updateTime', title: '更新时间', minWidth: 120, templet: function (item) {
+                        //         return CoreUtil.formattime(item.updateTime);
+                        //     }
+                        // },
                         {
                             field: 'status', title: '状态', width: 100, templet: function (item) {
                                 if (item.status === 1) {
@@ -239,20 +289,20 @@
                                 }
                             }
                         },
-                        {
-                            field: 'createWhere', title: '注册涞源', width: 100, templet: function (item) {
-                                if (item.createWhere === 1) {
-                                    return "Web";
-                                }
-                                if (item.createWhere === 2) {
-                                    return "Android";
-                                }
-                                if (item.createWhere === 3) {
-                                    return "Ios";
-                                }
-                            }
-                        },
-                        {width: 300, title: '操作', toolbar: '#tool'}
+                        // {
+                        //     field: 'createWhere', title: '注册涞源', width: 100, templet: function (item) {
+                        //         if (item.createWhere === 1) {
+                        //             return "Web";
+                        //         }
+                        //         if (item.createWhere === 2) {
+                        //             return "Android";
+                        //         }
+                        //         if (item.createWhere === 3) {
+                        //             return "Ios";
+                        //         }
+                        //     }
+                        // },
+                        {width: 220, title: '操作', toolbar: '#tool'}
                     ]
                 ]
                 , data: data
@@ -268,14 +318,24 @@
         table.on('toolbar(user_table)', function (obj) {
             switch (obj.event) {
                 case 'addNewUser':
+                    let $select = $(".operation_user select[name=userType]");
+                    $select.empty();
+                    $select.append('<option value="0"></option>').append('<option value="1">普通用户</option>')
+                        .append('<option value="2">审批用户</option>').append('<option value="3">窗口用户</option>').append('<option value="4">其它用户</option>');
                     $(".title").html("新增用户");
                     $(".user_table_div").hide();
                     $(".operation_user").show();
+                    $(".password").show();
+                    $(".repass").show();
                     $(".operation_user input[name=id]").val("");
                     $(".operation_user input[name=pid]").val("");
                     $(".operation_user input[name=username]").val("");
                     $(".operation_user input[name=password]").val("");
+                    $(".operation_user input[name=realName]").val("");
+                    $(".operation_user input[name=contactNumber]").val("");
+                    $(".operation_user input[name=repass]").val("");
                     $(".operation_user input[name=phone]").val("");
+                    $(".operation_user input[name=windowNum]").val("");
                     $(".operation_user input[name=deptName]").val("");
                     $(".operation_user input[name=status]").attr('checked', 'checked');
                     $(".operation_user input[name=status]").attr('type', 'hidden').val(1);
@@ -415,6 +475,13 @@
 
         //监听提交
         form.on('submit(submit)', function (data) {
+            var field = data.field;
+            console.log(field)
+            //确认密码
+            if(field.password !== field.repass){
+                layer.msg('两次密码输入不一致');
+                return false;
+            }
             //新增
             if (data.field.id === undefined || data.field.id === null || data.field.id === "") {
                 CoreUtil.sendAjax("/api/user", JSON.stringify(data.field), function (res) {
@@ -481,6 +548,9 @@
                 loadTable(noAuthorityData);
             });
         });
+
+        var userTypeMap={"1":"普通用户","2":"审批用户","3":"窗口用户","4":"其它用户"};
+
         //操作工具栏事件
         table.on('tool(user_table)', function (obj) {
             var data = obj.data;
@@ -533,9 +603,33 @@
                     $(".operation_user input[name=id]").val(data.id);
                     $(".operation_user input[name=deptId]").val(data.deptId);
                     $(".operation_user input[name=username]").val(data.username);
-                    $(".operation_user input[name=password]").val("");
+                    $(".password").hide();
+                    $(".repass").hide();
+                    $(".operation_user input[name=realName]").val(data.realName);
+                    $(".operation_user input[name=contactNumber]").val(data.contactNumber);
+                    $(".operation_user input[name=windowNum]").val(data.windowNum);
                     $(".operation_user input[name=phone]").val(data.phone);
                     $(".operation_user input[name=deptName]").val(data.deptName);
+                    // 遍历select
+                    let $select = $(".operation_user select[name=userType]");
+                    $select.empty();
+                    $select.append('<option value="0"></option>').append('<option value="1">普通用户</option>')
+                        .append('<option value="2">审批用户</option>').append('<option value="3">窗口用户</option>').append('<option value="4">其它用户</option>');
+                    $select.each(function() {
+                        // this代表的是<option></option>，对option再进行遍历
+                        $(this).children("option").each(function() {
+                            // 判断需要对那个选项进行回显
+                            console.log(this.value+"2020");
+                            if (this.value==0){
+                                $(this).attr("selected","selected");
+                            }
+                            if (this.value == data.userType) {
+                                console.log($(this).text());
+                                // 进行回显
+                                $(this).attr("selected","selected");
+                            }
+                        });
+                    });
                     if (data.status == 1) {
                         $(".operation_user input[name=status]").attr('checked', 'checked');
                         $(".operation_user input[name=status]").attr('type', 'hidden').val(1);

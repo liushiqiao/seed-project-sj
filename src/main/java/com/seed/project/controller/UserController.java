@@ -20,6 +20,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -60,6 +61,9 @@ public class UserController {
     @LogAnnotation(title = "组织管理-用户管理",action = "分页查询用户接口根据部门id")
     public DataResult<PageVO<SysUser>> pageInfoByDeptId(@RequestBody UserPageReqVO vo){
         DataResult result=DataResult.success();
+        if (vo==null || StringUtils.isBlank(vo.getDeptId())){
+            return result;
+        }
         result.setData(userService.pageInfoByDeptId(vo));
         return result;
     }

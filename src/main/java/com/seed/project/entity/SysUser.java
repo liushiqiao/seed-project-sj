@@ -42,5 +42,10 @@ public class SysUser implements Serializable {
 
     private String deptName;
 
+    //联系电话
+    private String contactNumber;
+    //窗口号
+    private Integer windowNum;
+    private Integer userType;
 
 }

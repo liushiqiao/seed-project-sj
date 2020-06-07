@@ -14,6 +14,7 @@ import com.seed.project.vo.req.DeptAddReqVO;
 import com.seed.project.vo.req.DeptUpdateReqVO;
 import com.seed.project.vo.resp.DeptRespNodeVO;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -81,11 +83,57 @@ public class DeptServiceImpl implements DeptService {
         List<DeptRespNodeVO> result = new ArrayList<>();
         for (DeptRespNodeVO deptRespNodeVO : deptRespNodeVOS) {
             deptRespNodeVO.setChildren(groupByPidDept.get(deptRespNodeVO.getId()));
-            if (ROOT_DEPT_NODE.equals(deptRespNodeVO.getPid())){
+            if (ROOT_DEPT_NODE.equals(deptRespNodeVO.getPid())) {
                 result.add(deptRespNodeVO);
             }
         }
         return result;
+    }
+
+    @Override
+    public List<String> getSubDeptIdByPid(String pid) {
+        List<SysDept> sysDepts = sysDeptMapper.selectAllIds();
+        if (sysDepts.isEmpty() || StringUtils.isBlank(pid)) {
+            return Collections.emptyList();
+        }
+        Map<String, List<SysDept>> groupByPidDept = sysDepts.stream().filter(sysDept -> !ROOT_DEPT_NODE.equals(sysDept.getPid()))
+                .collect(Collectors.groupingBy(SysDept::getPid));
+
+        List<String> res = new ArrayList<>();
+        res.add(pid);
+        //递归
+        getSubIdsByPid(groupByPidDept, Arrays.asList(pid), res);
+
+        return res;
+    }
+
+    /**
+     * 获取子部门id
+     *
+     * @param sysDeptsMap
+     * @param pids
+     * @param res
+     * @return
+     */
+    private void getSubIdsByPid(Map<String, List<SysDept>> sysDeptsMap, List<String> pids, List<String> res) {
+
+        if (CollectionUtils.isEmpty(pids)) {
+            return;
+        }
+        List<String> subPids = new ArrayList<>();
+        for (String pid : pids) {
+            List<SysDept> sysDepts = sysDeptsMap.get(pid);
+            if (CollectionUtils.isEmpty(sysDepts)) {
+                continue;
+            }
+            List<String> subIds = sysDepts.stream().map(SysDept::getId).collect(Collectors.toList());
+            res.addAll(subIds);
+            //递归参数
+            subPids.addAll(subIds);
+        }
+        getSubIdsByPid(sysDeptsMap, subPids, res);
+
+        return;
     }
 
 

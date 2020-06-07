@@ -18,6 +18,8 @@ public interface DeptService {
 
     List<SysDept> selectAll();
 
+    List<String> getSubDeptIdByPid(String pid);
+
     List<DeptRespNodeVO> deptTreeList(String deptId);
 
     SysDept addDept(DeptAddReqVO vo);

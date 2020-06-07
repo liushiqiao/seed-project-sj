@@ -33,4 +33,16 @@ public class UserUpdateReqVO {
 
     @ApiModelProperty(value = "所属部门")
     private String deptId;
+
+    @ApiModelProperty(value = "真实姓名")
+    private String realName;
+
+    @ApiModelProperty(value = "联系电话")
+    private String contactNumber;
+
+    @ApiModelProperty(value = "用户类型")
+    private Integer userType;
+
+    @ApiModelProperty(value = "窗口号")
+    private Integer windowNum;
 }
