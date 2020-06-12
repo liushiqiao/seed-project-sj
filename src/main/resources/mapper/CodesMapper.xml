@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.seed.project.mapper.CodesMapper">
+  <resultMap id="BaseResultMap" type="com.seed.project.entity.Codes">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="codeid" jdbcType="INTEGER" property="codeid" />
+    <result column="codename" jdbcType="VARCHAR" property="codename" />
+    <result column="codetype" jdbcType="INTEGER" property="codetype" />
+    <result column="codevalue" jdbcType="VARCHAR" property="codevalue" />
+    <result column="byindex" jdbcType="INTEGER" property="byindex" />
+    <result column="flag" jdbcType="INTEGER" property="flag" />
+    <result column="isuse" jdbcType="INTEGER" property="isuse" />
+    <result column="isdel" jdbcType="INTEGER" property="isdel" />
+    <result column="parentcode" jdbcType="VARCHAR" property="parentcode" />
+    <result column="icon" jdbcType="VARCHAR" property="icon" />
+    <result column="addtion1" jdbcType="VARCHAR" property="addtion1" />
+    <result column="addtion2" jdbcType="VARCHAR" property="addtion2" />
+    <result column="addtion3" jdbcType="VARCHAR" property="addtion3" />
+  </resultMap>
+</mapper>

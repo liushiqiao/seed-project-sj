@@ -100,4 +100,10 @@ public class IndexController {
     public String myFile(){
         return "files/my_file";
     }
+
+    @GetMapping("/codes")
+    @ApiOperation(value ="码表页面入口")
+    public String codes(){
+        return "codes/code.html";
+    }
 }

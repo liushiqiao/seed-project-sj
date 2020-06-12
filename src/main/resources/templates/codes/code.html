@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en" xml:th="http://www.thymeleaf.org" xmlns:shiro="http://www.pollix.at/thymeleaf/shiro">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/layui/css/layui.css">
+    <link rel="stylesheet" href="/css/custom.form.css">
+</head>
+<body class="layui-layout-body">
+<!--<div class="layui-header header"></div>-->
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-side" style="top: 0px;padding-top: 30px;width:20%;background: #f2f2f2">
+        <div class="layui-side-scroll" style="width: 100%">
+            <div id="allDeptTree"></div>
+        </div>
+    </div>
+
+    <div class="layui-body" style="top: 0px;width: 87%;padding-left: 160px">
+        <div class="panel panel-default operation_user" hidden>
+            <div class="panel-heading title"></div>
+            <div class="layui-card-body">
+                <form class="layui-form " action="" lay-filter="deptInfo" style="width: 700px;margin-top: 10px">
+                    <input name="codeid" hidden/>
+                    <input name="parentcode" hidden/>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">代码名称</label>
+                        <div class="layui-input-block">
+                            <input type="codename" name="codename" placeholder="请输入代码名称" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item password">
+                        <div class="layui-form-label ">代码类型</div>
+                        <div class="layui-input-block">
+                            <input type="codetype" name="codetype" placeholder="请输入代码类型" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item repass">
+                        <div class="layui-form-label ">代码内容</div>
+                        <div class="layui-input-block">
+                            <input type="codevalue" name="codevalue" placeholder="请确认代码内容" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">排序代号</div>
+                        <div class="layui-input-block">
+                            <input type="byindex" name="byindex" placeholder="请输入排序代号" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">预留标志</div>
+                        <div class="layui-input-block">
+                            <input type="flag" name="flag" placeholder="请输入预留标志" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">所属代码</div>
+                        <div class="layui-input-block">
+                            <input type="parentname" name="parentname" placeholder="请选择所属代码" autocomplete="off"
+                                   class="layui-input" readonly="readonly" style="background:#eeeeee!important">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">icon</div>
+                        <div class="layui-input-block">
+                            <input type="icon" name="icon" placeholder="请输入icon" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">addtion1</div>
+                        <div class="layui-input-block">
+                            <input type="addtion1" name="addtion1" placeholder="请输入addtion1" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">addtion2</div>
+                        <div class="layui-input-block">
+                            <input type="addtion2" name="addtion2" placeholder="请输入addtion2" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-form-label ">addtion3</div>
+                        <div class="layui-input-block">
+                            <input type="addtion3" name="addtion3" placeholder="请输入addtion3" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+
+                    <!--                    <div class="layui-form-item">-->
+                    <!--                        <div class="layui-form-label ">用户类型</div>-->
+                    <!--                        <div class="layui-input-inline">-->
+                    <!--                            <select name="userType" lay-filter="userType">-->
+                    <!--                                <option value="0"></option>-->
+                    <!--                                <option value="1">普通用户</option>-->
+                    <!--                                <option value="2">审批用户</option>-->
+                    <!--                                <option value="3">窗口用户</option>-->
+                    <!--                                <option value="4">其它用户</option>-->
+                    <!--                            </select>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="layui-form-item">-->
+                    <!--                        <div class="layui-form-label ">手机号</div>-->
+                    <!--                        <div class="layui-input-block">-->
+                    <!--                            <input type="phone" name="phone" placeholder="请输入手机号" autocomplete="off"-->
+                    <!--                                   class="layui-input">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="layui-form-item">-->
+                    <!--                        <div class="layui-form-label ">联系电话</div>-->
+                    <!--                        <div class="layui-input-block">-->
+                    <!--                            <input type="contactNumber" name="contactNumber" placeholder="请输入联系电话" autocomplete="off"-->
+                    <!--                                   class="layui-input">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="layui-form-item">-->
+                    <!--                        <div class="layui-form-label ">窗口号</div>-->
+                    <!--                        <div class="layui-input-inline">-->
+                    <!--                            <input type="windowNum" name="windowNum" placeholder="请输入窗口号" autocomplete="off"-->
+                    <!--                                   class="layui-input">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <!--                    <div class="layui-form-item">-->
+                    <!--                        <div class="layui-form-label ">所属部门</div>-->
+                    <!--                        <div class="layui-input-block">-->
+                    <!--                            <input type="deptName" name="deptName" placeholder="请选择所属部门" autocomplete="off"-->
+                    <!--                                   class="layui-input" readonly="readonly" style="background:#eeeeee!important">-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">状态</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" name="isuse" lay-skin="switch" lay-filter="switch" lay-text="启用|禁用"
+                                   checked>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button type="submit" class="layui-btn" lay-submit="" lay-filter="submit">保存</button>
+                            <button class="layui-btn layui-btn-primary" id="btn_cancel">返回</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="user_table_div">
+            <div id="searchParam" shiro:hasPermission="sys:user:list">
+                <div class="layui-form-item">
+                    <div class="layui-input-inline">
+                        <input type="text" id="codeName" class="layui-input" autocomplete="off" placeholder="请输入代码名称">
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" id="codeValue" class="layui-input" autocomplete="off" placeholder="请输代码内容">
+                    </div>
+                    <div class="layui-input-inline layui-form">
+                        <select id="isuse">
+                            <option value="">请选择账号状态</option>
+                            <option value="1">正常</option>
+                            <option value="2">禁用</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline ">
+                        <button class="layui-btn" id="search">查询</button>
+                    </div>
+                </div>
+
+            </div>
+            <table class="layui-hide" id="user_table" lay-filter="user_table"></table>
+            <div id="laypage" class="layui-laypage-btn"></div>
+        </div>
+        <div id="deptTree" style="display: none"></div>
+        <div id="roles" class="demo-transfer" style="display: none"></div>
+    </div>
+</div>
+</body>
+<script type="text/html" id="toolbar">
+    <div class="layui-btn-group">
+        <button type="button" class="layui-btn" lay-event="addNewUser" shiro:hasPermission="sys:user:add">
+            <i class="layui-icon">&#xe608;</i> 新增代码
+        </button>
+    </div>
+    <div class="layui-btn-group">
+        <button type="button" class="layui-btn" lay-event="batchDeleted" shiro:hasPermission="sys:user:delete">
+            <i class="layui-icon">&#xe608;</i> 批量删除
+        </button>
+    </div>
+</script>
+<script type="text/html" id="tool">
+    <a class="layui-btn layui-btn-xs" lay-event="edit" shiro:hasPermission="sys:user:update">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del" shiro:hasPermission="sys:user:delete">删除</a>
+</script>
+<script src="/layui/layui.js"></script>
+<script src="/js/core.util.js"></script>
+<script>
+    layui.use(['jquery', 'table', 'laypage', 'laydate', 'form', 'tree', 'layer', 'transfer'], function () {
+        var $ = layui.jquery;
+        var table = layui.table;
+        var laypage = layui.laypage;
+        var laydate = layui.laydate;
+        var form = layui.form;
+        var tree = layui.tree;
+        var layer = layui.layer;
+        var transfer = layui.transfer;
+        var searchParam = {
+            pageNum: 1,
+            pageSize: 10,
+            codeType: null,
+            codeName: null,
+            isuse: null,
+            codeValue: null,
+            endTime: null,
+            nickName: null,
+            codeId: null
+        }
+
+        /*记录部门树选中的节点*/
+        var selectNode = null;
+        CoreUtil.sendAjax("/api/codes/list", JSON.stringify(searchParam), function (res) {
+            laypageTable(res.data.totalRows, searchParam.pageNum);
+            if (res.data.list != null) {
+                loadTable(res.data.list);
+            }
+        }, "POST", false, function (res) {
+            //用户列表接口无权限回调
+            layer.msg("抱歉！您暂无获取用户列表的权限");
+            var noAuthorityData = [];
+            loadTable(noAuthorityData);
+        });
+
+        //渲染分页插件
+        var laypageTable = function (count, currentPage) {
+            laypage.render({
+                elem: 'laypage'
+                , count: count
+                , limit: searchParam.pageSize
+                , layout: ['count', 'prev', 'page', 'next', 'limit', 'refresh', 'skip']
+                , curr: location.hash.replace('#!currentPage=', '') //获取起始页
+                , hash: 'currentPage' //自定义hash值
+                , jump: function (obj, first) {
+                    if (!first) {
+                        searchParam.pageNum = obj.curr;
+                        searchParam.pageSize = obj.limit;
+                        CoreUtil.sendAjax("/api/codes/list", JSON.stringify(searchParam), function (res) {
+                            if (res.data.list != null) {
+                                loadTable(res.data.list);
+                                laypageTable(res.data.totalRows, searchParam.pageNum);
+                            }
+
+                        }, "POST", false, function (res) {
+                            //用户列表接口无权限回调
+                            layer.msg("抱歉！您暂无获取用户列表的权限");
+                            var noAuthorityData = [];
+                            loadTable(noAuthorityData);
+                        });
+                    }
+                }
+            });
+        };
+
+        //渲染table
+        var loadTable = function (data) {
+            //展示已知数据
+            table.render({
+                elem: '#user_table'
+                , cols: [
+                    [
+                        {type: 'checkbox', fixed: 'left'},
+                        // {field: 'id', title: 'ID', width: 300, sort: true},
+                        {field: 'codetype', title: '类型', width: 180},
+                        {field: 'codename', title: '名称', width: 180},
+                        {field: 'codevalue', title: '内容', width: 180},
+                        {field: 'byindex', title: '排序号', width: 180},
+                        // {field: 'userType', title: '状态', width: 100 , templet: function (item) {
+                        //         if (item.userType === 1) {
+                        //             return '普通用户';
+                        //         }else if (item.userType === 2){
+                        //             return '审批用户';
+                        //         }else if (item.userType === 3){
+                        //             return '窗口用户';
+                        //         }else if(item.userType === 4) {
+                        //             return '其它用户';
+                        //         }else {
+                        //             return '';
+                        //         }
+                        //     }
+                        // },
+                        {field: 'flag', title: '预留标志', width: 180},
+
+                        // {
+                        //     field: 'createTime', title: '创建时间', minWidth: 170, sort: true,templet: function (item) {
+                        //         return CoreUtil.formattime(item.createTime);
+                        //     }
+                        // },
+                        {
+                            field: 'isuse', title: '状态', width: 147, templet: function (item) {
+                                if (item.isuse === 1) {
+                                    return '  <input type="checkbox" lay-skin="switch" lay-text="正常|禁用" checked disabled>';
+                                }
+                                if (item.isuse === 2) {
+                                    return '  <input type="checkbox" lay-skin="switch" lay-text="正常|禁用" disabled>';
+                                }
+                            }
+                        },
+                        {width: 200, title: '操作', toolbar: '#tool'}
+                    ]
+                ]
+                , data: data
+                , even: true
+                , limit: data.length
+                , limits: [10, 20, 30, 40, 50]
+                , toolbar: '#toolbar'
+
+            });
+        };
+
+        //表头工具栏事件
+        table.on('toolbar(user_table)', function (obj) {
+            switch (obj.event) {
+                case 'addNewUser':
+                    let $select = $(".operation_user select[name=userType]");
+                    $select.empty();
+                    $select.append('<option value="0"></option>').append('<option value="1">普通用户</option>')
+                        .append('<option value="2">审批用户</option>').append('<option value="3">窗口用户</option>').append('<option value="4">其它用户</option>');
+                    $(".title").html("新增代码");
+                    $(".user_table_div").hide();
+                    $(".operation_user").show();
+                    $(".password").show();
+                    $(".repass").show();
+                    $(".operation_user input[name=id]").val("");
+                    $(".operation_user input[name=pid]").val("");
+                    $(".operation_user input[name=username]").val("");
+                    $(".operation_user input[name=password]").val("");
+                    $(".operation_user input[name=realName]").val("");
+                    $(".operation_user input[name=contactNumber]").val("");
+                    $(".operation_user input[name=repass]").val("");
+                    $(".operation_user input[name=phone]").val("");
+                    $(".operation_user input[name=windowNum]").val("");
+                    $(".operation_user input[name=deptName]").val("");
+                    $(".operation_user input[name=isuse]").attr('checked', 'checked');
+                    $(".operation_user input[name=isuse]").attr('type', 'hidden').val(1);
+                    var x = document.getElementsByClassName("layui-unselect layui-form-switch");
+                    x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                    var d = document.getElementsByTagName('em')[0];
+                    d.firstChild.nodeValue = '启用';
+                    form.render(); //更新全部
+                    initTree();
+                    break;
+                case 'batchDeleted':
+                    var checkStatus = table.checkStatus(obj.config.id);
+                    var data = checkStatus.data;
+                    if (data.length == 0) {
+                        layer.msg("请选择要批量删除的用户");
+                    } else {
+                        var userIds = [];
+                        $(data).each(function (index, item) {
+                            userIds.push(item.codeid);
+                        });
+                        tipDialog(userIds, "选中的");
+                    }
+                    break;
+            }
+            ;
+        });
+
+        //监听指定开关
+        form.on('switch(switch)', function () {
+            $(".operation_user input[name=isuse]").attr('type', 'hidden').val(this.checked ? 1 : 2);
+
+        });
+        //编辑或新增的界面取消事件
+        $("#btn_cancel").click(function () {
+            //显示表格
+            $(".user_table_div").show();
+            //隐藏编辑窗口
+            $(".operation_user").hide();
+            //可以防止在表单事件操作后自动刷新
+            return false;
+        });
+        var initTree = function () {
+            CoreUtil.sendAjax("/api/codes/codeTree", null, function (res) {
+                loadDeptTree(res.data);
+            }, "GET", false, function (res) {
+                //部门树列表无权限提示
+                layer.msg("抱歉！您暂无获取部门树的权限");
+                var noAuthorityData = [];
+                loadDeptTree(noAuthorityData);
+            });
+        };
+        //加载部门树数据
+        var loadDeptTree = function (data) {
+            //仅节点左侧图标控制收缩
+            tree.render({
+                elem: '#deptTree'
+                , data: data
+                , onlyIconControl: true  //是否仅允许节点左侧图标控制展开收缩
+                , click: function (obj) {
+                    selectNode = obj;
+                    layer.msg(JSON.stringify(selectNode.data.title));
+                }
+            });
+        };
+
+        var allDeptTree = function () {
+            CoreUtil.sendAjax("/api/codes/codeTree", null, function (res) {
+                loadAllDeptTree(res.data);
+                console.log(res.data);
+            }, "GET", false, function (res) {
+                //部门树列表无权限提示
+                layer.msg("抱歉！您暂无获取部门树的权限");
+                var noAuthorityData = [];
+                loadDeptTree(noAuthorityData);
+            });
+        };
+
+        //加载部门树数据
+        var loadAllDeptTree = function (data) {
+            //仅节点左侧图标控制收缩
+            tree.render({
+                elem: '#allDeptTree'
+                , data: data
+                , onlyIconControl: true
+                // ,showLine: false  //是否开启连接线
+                , click: function (obj) {
+                    selectNode = obj;
+                    getCodeAndSubCodeById(selectNode.data.id);
+                }
+            });
+        };
+
+
+        var getCodeAndSubCodeById = function (id) {
+            searchParam.codeId = id;
+            CoreUtil.sendAjax("/api/codes/getCodeAndSubCodeById", JSON.stringify(searchParam), function (res) {
+                //初始化分页器
+                laypageTable(res.data.totalRows, searchParam.pageNum);
+                $("#codeName").val("");
+                $("#isuse").val("");
+                $("#codeValue").val("");
+                //初始化渲染数据
+                if (res.data.list != null) {
+                    loadTable(res.data.list);
+                }
+            }, "POST", false, function (res) {
+                //用户列表接口无权限回调
+                layer.msg("抱歉！您暂无获取用户列表的权限");
+                var noAuthorityData = [];
+                loadTable(noAuthorityData);
+            });
+        };
+
+
+        allDeptTree();
+
+        //打开部门树对话框
+        $(".operation_user input[name=parentname]").click(function () {
+            layer.open({
+                type: 1,
+                offset: '50px',
+                skin: 'layui-layer-molv',
+                title: "选择部门",
+                area: ['400px', '550px'],
+                shade: 0,
+                shadeClose: false,
+                content: $("#deptTree"),
+                btn: ['确定', '取消'],
+                yes: function (index) {
+                    if (selectNode.data != null) {
+                        //选中回显
+                        $(".operation_user input[name=parentcode]").val(selectNode.data.id);
+                        $(".operation_user input[name=parentname]").val(selectNode.data.title);
+                    }
+
+                    layer.close(index);
+                }
+            });
+        });
+
+        //监听提交
+        form.on('submit(submit)', function (data) {
+            var field = data.field;
+            console.log(field)
+            //新增
+            if (data.field.codeid === undefined || data.field.codeid === null || data.field.codeid === "") {
+                CoreUtil.sendAjax("/api/codes/add", JSON.stringify(data.field), function (res) {
+                    //显示表格
+                    $(".user_table_div").show();
+                    //隐藏编辑窗口
+                    $(".operation_user").hide();
+                    $(".layui-laypage-btn").click();
+                }, "POST", false, function (res) {
+                    //新增用户无权限提示
+                    layer.msg("抱歉！您暂无新增用户的权限");
+                });
+            } else {
+                CoreUtil.sendAjax("/api/codes/update", JSON.stringify(data.field), function (res) {
+                    //显示表格
+                    $(".user_table_div").show();
+                    //隐藏编辑窗口
+                    $(".operation_user").hide();
+                    $(".layui-laypage-btn").click();
+                }, "PUT", false, function (res) {
+                    //更新用户无权限提示
+                    layer.msg("抱歉！您暂无编辑用户的权限");
+                });
+            }
+            return false;
+        });
+
+        //日期范围
+        laydate.render({
+            elem: '#createTime'
+            , type: 'datetime'
+            , range: '~'
+            , done: function (value, date, endDate) {
+                if (value != null && value != undefined && value != "") {
+                    searchParam.startTime = value.split("~")[0];
+                    searchParam.endTime = value.split("~")[1];
+                } else {
+                    //清空时间的时候要清空以前选择的日期
+                    searchParam.startTime = null;
+                    searchParam.endTime = null;
+                }
+
+            }
+        });
+
+        //执行查询
+        $("#search").click(function () {
+            searchParam.codeName = $("#codeName").val();
+            searchParam.isuse = $("#isuse").val();
+            searchParam.codeType = $("#codeType").val();
+            searchParam.codeValue = $("#codeValue").val();
+            searchParam.pageNum = 1;
+            CoreUtil.sendAjax("/api/codes/list", JSON.stringify(searchParam), function (res) {
+                //初始化分页器
+                laypageTable(res.data.totalRows, searchParam.pageNum);
+                //初始化渲染数据
+                if (res.data.list != null) {
+                    loadTable(res.data.list);
+                }
+            }, "POST", false, function (res) {
+                //用户列表接口无权限回调
+                layer.msg("抱歉！您暂无获取用户列表的权限");
+                var noAuthorityData = [];
+                loadTable(noAuthorityData);
+            });
+        });
+
+        var userTypeMap = {"1": "普通用户", "2": "审批用户", "3": "窗口用户", "4": "其它用户"};
+
+        //操作工具栏事件
+        table.on('tool(user_table)', function (obj) {
+            var data = obj.data;
+
+             switch (obj.event) {
+                case 'edit':
+                    $(".user_table_div").hide();
+                    $(".operation_user").show();
+                    $(".title").html("编辑代码");
+                    $(".operation_user input[name=codeid]").val(data.codeid);
+                    $(".operation_user input[name=codename]").val(data.codename);
+                    $(".operation_user input[name=codetype]").val(data.codetype);
+                    $(".operation_user input[name=parentname]").val("111");
+                    $(".operation_user input[name=parentcode]").val(data.parentcode);
+                    $(".operation_user input[name=parentname]").val(data.parentname);
+                    $(".operation_user input[name=codevalue]").val(data.codevalue);
+                    $(".operation_user input[name=byindex]").val(data.byindex);
+                    $(".operation_user input[name=flag]").val(data.flag);
+                    $(".operation_user input[name=icon]").val(data.icon);
+                    $(".operation_user input[name=addtion1]").val(data.addtion1);
+                    $(".operation_user input[name=addtion2]").val(data.addtion2);
+                    $(".operation_user input[name=addtion3]").val(data.addtion3);
+
+                    // CoreUtil.sendAjax("/api/codes/detail", {"id":data.parentcode}, function (res) {
+                    //     $(".operation_user input[name=parentname]").val(res.data.codename);
+                    // }, "GET", false, function (res) {
+                    //     //删除用户无权限
+                    //     layer.msg("抱歉！您暂无删除用户的权限");
+                    // });
+                    if (data.isuse == 1) {
+                        $(".operation_user input[name=isuse]").attr('checked', 'checked');
+                        $(".operation_user input[name=isuse]").attr('type', 'hidden').val(1);
+                        var x = document.getElementsByClassName("layui-unselect layui-form-switch");
+                        x[0].setAttribute("class", "layui-unselect layui-form-switch layui-form-onswitch");
+                        var d = document.getElementsByTagName('em')[0];
+                        d.firstChild.nodeValue = '启用';
+                    } else {
+                        $(".operation_user input[name=isuse]").attr('type', 'hidden').removeAttr("checked").val(2);
+                        var x = document.getElementsByClassName("layui-unselect layui-form-switch");
+                        x[0].setAttribute("class", "layui-unselect layui-form-switch");
+                        var d = document.getElementsByTagName('em')[0];
+                        d.firstChild.nodeValue = '禁用';
+                    }
+                    form.render(); //更新全部
+                    initTree();
+                    break;
+                case 'del':
+                    var userIds = [];
+                    userIds.push(data.codeid);
+                    tipDialog(userIds, data.codename);
+                    break;
+            }
+        });
+        //删除前确认对话框
+        var tipDialog = function (userIds, username) {
+            layer.open({
+                content: '确定要删除' + username + "编码么?",
+                yes: function (index, layero) {
+                    layer.close(index); //如果设定了yes回调，需进行手工关闭
+                    CoreUtil.sendAjax("/api/codes/delete", JSON.stringify(userIds), function (res) {
+                        layer.msg(res.msg);
+                        $(".layui-laypage-btn").click();
+                    }, "DELETE", false, function (res) {
+                        //删除用户无权限
+                        layer.msg("抱歉！您暂无删除用户的权限");
+                    });
+                }
+            });
+        };
+    });
+
+</script>
+</html>

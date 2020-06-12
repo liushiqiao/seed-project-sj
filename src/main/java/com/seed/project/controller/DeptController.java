@@ -45,7 +45,7 @@ public class DeptController {
     @ApiOperation(value = "查询所有部门树形结构数据接口")
     @LogAnnotation(title = "组织管理-部门管理",action = "查询所有部门树形结构数据接口")
     // @RequiresPermissions("sys:dept:list")
-    public DataResult<List<SysDept>> getAllDeptTree(){
+    public DataResult<List<DeptRespNodeVO>> getAllDeptTree(){
         DataResult result =DataResult.success();
         result.setData(deptService.getAllDeptTreeList());
         return result;
